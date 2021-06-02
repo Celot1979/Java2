@@ -44,9 +44,11 @@ class lamina extends JPanel implements ActionListener{
 		//Creación de labels
 		setLayout(null);
 		label1 = new JLabel("Etiqueta 1");
-		label1.setBounds(10, 20, 200, 30);
+		label1.setBounds(200, 20, 200, 30);
+		
 		label2 = new JLabel("Etiqueta 2");
-		label2.setBounds(10, 60, 200, 30);
+		label2.setBounds(200, 60, 200, 30);
+		
 		add(label1);
 		add(label2);
 		
@@ -54,26 +56,26 @@ class lamina extends JPanel implements ActionListener{
 		
 		
 		texto = new JTextField(10);
-		texto.setBounds(100,20,200,30);
+		texto.setBounds(280,20,200,30);
 		//textos = texto.getText();
 		add(texto);
 		
 		
 		texto2 = new JTextField(10);
-		texto2.setBounds(100,60,200,30);
+		texto2.setBounds(280,60,200,30);
 		add(texto2);
 		
 		//Creación de botones 
 		
 		boton1 = new JButton("Guardar");
-		boton1.setBounds(300,20,200,30);
+		boton1.setBounds(500,20,200,30);
 		boton1.addActionListener(this); 
 		add(boton1);
 		
 		
 		
 		boton2 =  new JButton("Borrar");
-		boton2.setBounds(300,60,200,30);
+		boton2.setBounds(500,60,200,30);
 		boton2.addActionListener(this); 
 		add(boton2);
 		
@@ -120,7 +122,7 @@ class lamina extends JPanel implements ActionListener{
 				//e.printStackTrace();
 				System.out.println("Un eerrorr");
 			}
-			g.drawImage(imagen,50,50, null);
+			g.drawImage(imagen,0,50, null);
 			
 		}
 		private Image imagen;
