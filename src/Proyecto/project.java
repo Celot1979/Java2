@@ -1,5 +1,9 @@
 package Proyecto;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +34,7 @@ class Marco extends JFrame{
 	}
 }
 
-class lamina extends JPanel{
+class lamina extends JPanel implements ActionListener{
 	public lamina() {
 		//Creación de labels
 		setLayout(null);
@@ -43,8 +47,10 @@ class lamina extends JPanel{
 		
 		//Creación de cajas de texto
 		
+		
 		texto = new JTextField(10);
 		texto.setBounds(100,20,200,30);
+		//textos = texto.getText();
 		add(texto);
 		
 		
@@ -56,10 +62,14 @@ class lamina extends JPanel{
 		
 		boton1 = new JButton("Guardar");
 		boton1.setBounds(300,20,200,30);
+		boton1.addActionListener(this); 
 		add(boton1);
+		
+		
 		
 		boton2 =  new JButton("Borrar");
 		boton2.setBounds(300,60,200,30);
+		boton2.addActionListener(this); 
 		add(boton2);
 		
 		
@@ -73,4 +83,27 @@ class lamina extends JPanel{
 	private JLabel label1,label2;
 	private JTextField texto, texto2;
 	private JButton boton1, boton2;
+	private String textos, textos2;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Object pulsado = e.getSource();
+		/*1º Creamos un objeto que nos haga interpretar que acción hacer dependiendo
+		 * del botón que toquemos. Para ello usamos un condicional.
+		 * 
+		 * 2ºPara que lo introduccido por caja sea imprimido
+		 * se debe primero crear un String ( que para que sea accesible
+		 * en todo el código las iniciamos como propiedades)
+		 * 
+		 * 3º En los condicionales en el 1º lugar es guardar que lo que vamos a realizar es imprimir
+		 * por consola las dos cajas de texto
+		 */
+		textos = texto.getText();
+		textos2 = texto2.getText();
+		if(pulsado == boton1) System.err.println(textos +  " "+  textos2);
+		else if(pulsado == boton2)System.out.println("Aun no sé borrar");
+	}
+	
+	
+	
 }
