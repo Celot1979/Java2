@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class Eventos {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generaxted method stub
 		MarcoBotonesColores mimarco = new MarcoBotonesColores();
 		mimarco.setVisible(true);
 		mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
