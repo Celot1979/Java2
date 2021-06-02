@@ -1,8 +1,13 @@
 package Proyecto;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -105,5 +110,19 @@ class lamina extends JPanel implements ActionListener{
 	}
 	
 	
+	public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			File miImagen = new File("/Users/danielgil/Desktop/JAVA/clase/src/Proyecto/palevlas.png");
+			try {
+				imagen = ImageIO.read(miImagen);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				System.out.println("Un eerrorr");
+			}
+			g.drawImage(imagen,50,50, null);
+			
+		}
+		private Image imagen;
 	
 }
