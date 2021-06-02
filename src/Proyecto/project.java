@@ -1,5 +1,6 @@
 package Proyecto;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ class Marco extends JFrame{
 
 class lamina extends JPanel{
 	public lamina() {
+		//Creación de labels
 		setLayout(null);
 		label1 = new JLabel("Etiqueta 1");
 		label1.setBounds(10, 20, 200, 30);
@@ -38,6 +40,8 @@ class lamina extends JPanel{
 		label2.setBounds(10, 60, 200, 30);
 		add(label1);
 		add(label2);
+		
+		//Creación de cajas de texto
 		
 		texto = new JTextField(10);
 		texto.setBounds(100,20,200,30);
@@ -48,8 +52,25 @@ class lamina extends JPanel{
 		texto2.setBounds(100,60,200,30);
 		add(texto2);
 		
+		//Creación de botones 
+		
+		boton1 = new JButton("Guardar");
+		boton1.setBounds(300,20,200,30);
+		add(boton1);
+		
+		boton2 =  new JButton("Borrar");
+		boton2.setBounds(300,60,200,30);
+		add(boton2);
+		
+		
+		
 		
 	}
+	/*Se realiza la creación de las propiedades creo que por 2 motivos
+	 * 1º PAra la simplificación del código.
+	 * 2º Para poder ser usadas en todo el código
+	 */
 	private JLabel label1,label2;
-	JTextField texto, texto2;
+	private JTextField texto, texto2;
+	private JButton boton1, boton2;
 }
