@@ -117,7 +117,10 @@ class lamina extends JPanel implements ActionListener{
 		
 		
 		if(pulsado == boton1) System.err.println(textos +  " "+  textos2);
-		else if(pulsado == boton2)System.err.println("Aun no sé borrar");
+		else if(pulsado == boton2) {
+			texto.setText(tx);
+			texto2.setText(tx);
+		}
 	}
 	
 	
