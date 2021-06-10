@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,8 +23,8 @@ public class project {
 		// TODO Auto-generated method stub
 		Marco mimarco = new Marco();
 		mimarco .setVisible(true);
-		mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		mimarco.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mimarco.addWindowListener(new EventoDeVentana());
 	}
 
 }
@@ -91,6 +93,7 @@ class lamina extends JPanel implements ActionListener{
 	private JTextField texto, texto2;
 	private JButton boton1, boton2;
 	private String textos, textos2;
+	private String tx;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -107,12 +110,18 @@ class lamina extends JPanel implements ActionListener{
 		 */
 		textos = texto.getText();
 		textos2 = texto2.getText();
+		
+		tx = ("");
+		
+		
+		
+		
 		if(pulsado == boton1) System.err.println(textos +  " "+  textos2);
-		else if(pulsado == boton2)System.out.println("Aun no sé borrar");
+		else if(pulsado == boton2)System.err.println("Aun no sé borrar");
 	}
 	
 	
-	/*public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			File miImagen = new File("/Users/danielgil/Desktop/JAVA/clase/src/Proyecto/palevlas.png");
 			try {
@@ -125,6 +134,27 @@ class lamina extends JPanel implements ActionListener{
 			g.drawImage(imagen,0,50, null);
 			
 		}
-		private Image imagen;*/
+		private Image imagen;
 	
+}
+
+
+  /*Vamos a poner en practica lo aprendido en EVENTOS DE VENTNA
+   * OJETIVO: El objetivo de esta practica es que cuando recemos la ventana de la app,
+   * nos salga por consola un mensaje agradeciendo el trabajo realizado.
+   * 
+   * 1º Paso. Cambiar en la clase de ejecución el comportamiento de la ventana a la hora de cerrarse
+   * Es decir, vamos a cambiar el JFrame.EXIT_ON_CLOSE por JFrame.DISPONSE_ON_CLOSE.
+   * 
+   * 2º Paso. Crearemos una clase que implemente la clase WindowAdpater (una clase adptadora).
+   * En ella están 4 interfaces, pero al usar esta clase no tenemos que cumplimentar todos los 
+   * métodos que tienen cada interfaz.
+   * 
+   * 3º Crearemos el objet- escucha que con el método addWindow añadirá el comportameinto a la ventana
+   */
+   
+class EventoDeVentana extends WindowAdapter{
+	public void windowClosed(WindowEvent e) {
+		System.out.println("Gracias por trabajar con la app. Te esperamos pronto...");
+	}
 }
