@@ -112,7 +112,7 @@ class lamina extends JPanel implements ActionListener{
 	}
 	
 	
-	public void paintComponent(Graphics g) {
+	/*public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			File miImagen = new File("/Users/danielgil/Desktop/JAVA/clase/src/Proyecto/palevlas.png");
 			try {
@@ -125,6 +125,6 @@ class lamina extends JPanel implements ActionListener{
 			g.drawImage(imagen,0,50, null);
 			
 		}
-		private Image imagen;
+		private Image imagen;*/
 	
 }
