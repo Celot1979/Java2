@@ -29,7 +29,7 @@ class WindowEvents implements WindowStateListener{
 	@Override
 	public void windowStateChanged(WindowEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("The window has changed stateo");
+		System.out.println("The window has changed state");
 		
 		System.out.println(e.getNewState());
 		
