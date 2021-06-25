@@ -38,9 +38,23 @@ class EventoDeTeclado implements KeyListener{
 		// TODO Auto-generated method stub
 		
 		//System.out.println("Has pulsado una tecla: " + e.getKeyChar());
-		System.out.println("Has pulsado una tecla: " + e.getKeyCode());
+		//System.out.println("Has pulsado una tecla: " + e.getKeyCode());
 		
+		//if (e.getKeyCode() == 74)System.out.println("Has pulsado la letra J");
+
+		//--------------------------------------------------------------------------------------------------
+		/*
+		 * También se puede hacer usando los métodos estaticos que trae la API de Java.
+		 * Con el teclado de IMAc no funcionan( eso es porque no siempre todos los teclados funcionan).
+		 */
 		
+		//if(e.getKeyCode() == KeyEvent.VK_J) System.out.println("Has pulsado la letra J");
+		
+		//--------------------------------------------------------------------------------------------------
+		/*Esta sentencia tal y coo la vemos, es para que el propio sistema
+		 * detecte que tecla estamos presioando
+		 */
+		System.out.println("Has pulsado la tecla : " + e.getKeyText(e.getKeyCode()));
 	}
 
 	@Override
