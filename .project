@@ -14,13 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/Ejercicio_Eventos_III/Examen_Eventos.java</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/Downloads/Examen_Eventos.java</locationURI>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1626455215188</id>
