@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 
 
-import javax.swing;
+
 
 public class Calculadora {
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class Calculadora {
 class Marco extends JFrame{
     public Marco(){
         setTitle("Calculadora");
-        setBounds(600,500,400,400);
+        setBounds(800,300,400,200);
         laminaCaja lamina = new laminaCaja();
         
 
@@ -53,7 +53,7 @@ class laminaCaja extends JPanel{
         numeracion.add(new JButton("3"));
         numeracion.add(new JButton("+"));
         numeracion.add(new JButton("0"));
-        numeracion.add(new JButton("',"));
+        numeracion.add(new JButton(","));
         numeracion.add(new JButton("="));
 
         add(numeracion, BorderLayout.CENTER);
