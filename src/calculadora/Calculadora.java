@@ -43,7 +43,7 @@ class laminaCaja extends JPanel{
         numeracion.add(new JButton("7"));
         numeracion.add(new JButton("8"));
         numeracion.add(new JButton("9"));
-        numeracion.add(new JButton("X"));
+        numeracion.add(new JButton("x"));
         numeracion.add(new JButton("4"));
         numeracion.add(new JButton("5"));
         numeracion.add(new JButton("6"));
@@ -55,6 +55,7 @@ class laminaCaja extends JPanel{
         numeracion.add(new JButton("0"));
         numeracion.add(new JButton(","));
         numeracion.add(new JButton("="));
+        numeracion.add(new JButton(" "));
 
         add(numeracion, BorderLayout.CENTER);
 
