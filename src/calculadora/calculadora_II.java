@@ -60,9 +60,3 @@ class laminaCaja extends JPanel{
     }
     private JPanel numeracion;
 }
-/*En está lección hemos creado un método privado que será el encargado de ir creando los botones
-según el flujo del programa vaya trabajando.
-Posteriormente hemos ido definiendo cada botón del método en el Panel principal.
-
-Finalmente hemos pasado la variable objeto local (JPanel numeracion) a varieble ámbito de clase.
-Sólo nombramos está variable en el contructor. */
