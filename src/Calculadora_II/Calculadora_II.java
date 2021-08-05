@@ -68,7 +68,7 @@ class laminaCaja extends JPanel{
     		}else {
     			pantalla.setText(pantalla.getText() + entrada);
     		}
-    		cs
+    		
     		
     		
     	}
