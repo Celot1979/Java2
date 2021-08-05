@@ -59,3 +59,4 @@ class lamina_General extends JPanel{
 
     private JPanel numeracion;
 }
+// no se que coño pasando
