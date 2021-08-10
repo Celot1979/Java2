@@ -87,21 +87,47 @@ class lamina_General extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            String teclaPulsada = e.getActionCommand();
-            resultado+= ultimoValor;
-            pantalla.setText("" + resultado);
-			comienzo = true;
+            String operacionPulsada = e.getActionCommand();
+            if(operacionPulsada.equals("+")){
+                resultado += ultimoValor;
+                pantalla.setText("" + resultado);
+                UltimaOperacion = "+";
+            }else if(operacionPulsada.equals("x")){
+                double valor = Double.parseDouble(pantalla.getText());
+                if(contador == 0) {
+                    resultado = valor * 1;
+                }else{
+                    resultado *= ultimoValor;
+                    pantalla.setText("" + resultado);
+                    UltimaOperacion = "x";
+                    contador++;
 
+                }
+            }
+
+            else{
+                if(UltimaOperacion == "+"){
+                    resultado += ultimoValor;
+                }
+
+                if(UltimaOperacion == "x"){
+                    resultado *= ultimoValor;
+                    contador = 0;
+                }
+                
+                pantalla.setText("" + resultado);
+                ultimoValor = 0;
+            }
             
         }
-
+        private String UltimaOperacion;
+        private int contador;
     }
-   
     private JPanel numeracion;
     private JButton pantalla;
     private boolean comienzo;
     private String ultimoValor;
-    private boolean resultado;
+    private double resultado;
 
 }
 
