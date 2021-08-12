@@ -3,6 +3,12 @@ package Componentes_Swing;
 import javax.swing.*;
 
 public class JTextField {
+    public JTextField(int i) {
+    }
+
+    public JTextField() {
+    }
+
     public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MarcoCuadroTexto mimarco = new MarcoCuadroTexto();

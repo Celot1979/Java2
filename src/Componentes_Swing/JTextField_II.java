@@ -14,6 +14,7 @@ public class JTextField_II {
 }
 class MarcoCuadroTexto extends JFrame{
 	public MarcoCuadroTexto() {
+		setTitlte("Ejercicio");
 		setBounds(600,300,600,400);
 		add(new LaminaCuadroTexto());
 		setVisible(true);
