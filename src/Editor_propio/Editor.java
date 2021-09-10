@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-
-
 public class Editor {
 
 	public static void main(String[] args) {
@@ -18,26 +16,29 @@ public class Editor {
 	}
 
 }
-class marco extends JFrame{
+
+class marco extends JFrame {
 	public marco() {
 		setTitle("Editor de textos -Propio-");
-		setBounds(700,200,700,350);
+		setBounds(700, 200, 700, 350);
 		add(new Lamina());
-		setVisible(true);	
+		setVisible(true);
 	}
 }
-class Lamina extends JPanel{
+
+class Lamina extends JPanel {
 	public Lamina() {
-		setLayout(new BorderLayout());//Creación de compartimentos
-		JPanel superior = new JPanel();//Compartimento superior
-		JPanel inferior = new JPanel();//Compartimento inferior
-		miAreaTexto = new JTextArea(25,100);//Creación del area de texto
-		JScrollPane laminaScroll = new JScrollPane(miAreaTexto);// Creación del Scroll
-		miAreaTexto.setLineWrap(true);//Salto de línea del Area
-		inferior.add(laminaScroll);//añadir al compartimento inferior
-		add(superior,BorderLayout.NORTH);//Ubicación en el JPanel
-		add(inferior,BorderLayout.CENTER);//Ubicación en el JPanel
-		
+		setLayout(new BorderLayout());// Creaciï¿½n de compartimentos
+		JPanel superior = new JPanel();// Compartimento superior
+		JPanel inferior = new JPanel();// Compartimento inferior
+		miAreaTexto = new JTextArea(25, 100);// Creaciï¿½n del area de texto
+		JScrollPane laminaScroll = new JScrollPane(miAreaTexto);// Creaciï¿½n del Scroll
+		miAreaTexto.setLineWrap(true);// Salto de lï¿½nea del Area
+		inferior.add(laminaScroll);// aï¿½adir al compartimento inferior
+		add(superior, BorderLayout.NORTH);// Ubicaciï¿½n en el JPanel
+		add(inferior, BorderLayout.CENTER);// Ubicaciï¿½n en el JPanel
+		// prueba
 	}
-	private JTextArea miAreaTexto ;
+
+	private JTextArea miAreaTexto;
 }
