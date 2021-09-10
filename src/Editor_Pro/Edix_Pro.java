@@ -101,6 +101,27 @@ class Lamina extends JPanel {
 
         // -----------------------------------------------------------------------
         // -----------------------------------------------------------------------
+        // -------------------- Tipos de Textos--------------------------------
+        // -----------------------------------------------------------------------
+        // -----------------------------------------------------------------------
+        Estilo_Texto = new JMenu("Estilo");
+        myBar.add(Estilo_Texto);
+
+        JMenuItem titulo = new JMenuItem("TITULO");
+        titulo.addActionListener(new StyledEditorKit.AlignmentAction("Centro", 1));
+        titulo.addActionListener(new StyledEditorKit.BoldAction());
+        titulo.addActionListener(new StyledEditorKit.FontSizeAction("42", 42));
+        titulo.addActionListener(new StyledEditorKit.UnderlineAction());
+        Estilo_Texto.add(titulo);
+
+        JMenuItem subtitulo = new JMenuItem("SUBTITULO");
+        Estilo_Texto.add(subtitulo);
+
+        JMenuItem parrafo = new JMenuItem("PARRAFO");
+        Estilo_Texto.add(parrafo);
+
+        // -----------------------------------------------------------------------
+        // -----------------------------------------------------------------------
         // -------------------- BOTONES ESTILO DE TEXTO --------------------------
         // -----------------------------------------------------------------------
         // -----------------------------------------------------------------------
@@ -201,6 +222,7 @@ class Lamina extends JPanel {
 
         });
         myBar.add(color);
+
         // -----------------------------------------------------------------------
         // -----------------------------------------------------------------------
         // -------------------- AÑADIR A LA LAMINA --------------------------
@@ -234,8 +256,7 @@ class Lamina extends JPanel {
 
     }
 
-    // Método que devuelve un JFrame con los colores que queramos para la
-    // tipografía.
+    // Método que devuelve un JFrame con los colores que queramos para la tipograf
     private void ventana_color() {
         frameDos = new JFrame();
         frameDos.setTitle("Colores");
@@ -243,47 +264,50 @@ class Lamina extends JPanel {
         JPanel ventana = new JPanel();
         ventana.setLayout(new BorderLayout());
         JPanel superior_Dos = new JPanel();
-        prueba = new JLabel("Prueba");
 
-        // Dar color AZUL a la tipo
-        Azul = new JButton("Azul");
-        Azul.setPreferredSize(new Dimension(30, 30));
+        // Cambiar color AZUL a la tipografia
+        azu = new ImageIcon("/Users/danielgil/Desktop/Curso_Java/src/Editor_Propio/azul_m.png");
+        Azul = new JButton(azu);
+        // Azul.setPreferredSize(new Dimension(30, 30));
         Azul.addActionListener(new StyledEditorKit.ForegroundAction("Azul", Color.BLUE));
         superior_Dos.add(Azul);
-        Azul.addActionListener(new ActionListener() {
+        Azul.addActionListener(new sin_ventana());// Sentencia abreviada de la clase para cerrar ventana después de usar
+                                                  // el color
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                frameDos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frameDos.setVisible(false);
-                frameDos.dispose();
-
-            }
-
-        });
-
-        // Dar color ROJO a la tipo
-        Rojo = new JButton("Rojo");
-        Rojo.setPreferredSize(new Dimension(30, 30));
+        // Cambiar color ROJO a la tipografia
+        rojos = new ImageIcon("/Users/danielgil/Desktop/Curso_Java/src/Editor_Propio/rojo_m.png");
+        Rojo = new JButton(rojos);
+        // Rojo.setPreferredSize(new Dimension(30, 30));
         Rojo.addActionListener(new StyledEditorKit.ForegroundAction("Rojo", Color.RED));
         superior_Dos.add(Rojo);
-        Rojo.addActionListener(new ActionListener() {
+        Rojo.addActionListener(new sin_ventana());// Sentencia abreviada de la clase para cerrar ventana después de usar
+                                                  // el color
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                // frameDos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frameDos.setVisible(false);
-                frameDos.dispose();
-            }
-
-        });
+        // Cambiar color Negro a la tipografia
+        neg = new ImageIcon("/Users/danielgil/Desktop/Curso_Java/src/Editor_Propio/negro_m.png");
+        Negro = new JButton(neg);
+        Negro.addActionListener(new StyledEditorKit.ForegroundAction("Negro", Color.black));
+        superior_Dos.add(Negro);
+        Negro.addActionListener(new sin_ventana());// Sentencia abreviada de la clase para cerrar ventana después de
+                                                   // usar el color
 
         ventana.add(superior_Dos);
         frameDos.add(ventana);
         frameDos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frameDos.setVisible(true);
+
+    }
+
+    private class sin_ventana implements ActionListener {
+
+        @Override
+        // Clase privada para cerrar las ventanas de JFrame
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+            frameDos.setVisible(false);
+            frameDos.dispose();
+
+        }
 
     }
 
@@ -318,7 +342,15 @@ class Lamina extends JPanel {
     private JButton color;
     // Propiedades para el cambio de color
     private JFrame frameDos;
+    private ImageIcon azu;
     private JButton Azul;
+    private ImageIcon rojos;
     private JButton Rojo;
-    private JLabel prueba;
+    private ImageIcon neg;
+    private JButton Negro;
+    // Tipos de texto
+    private ImageIcon ti;
+    private JButton titulo;
+    private JMenu Estilo_Texto;
+
 }
