@@ -352,5 +352,5 @@ class Lamina extends JPanel {
     private ImageIcon ti;
     private JButton titulo;
     private JMenu Estilo_Texto;
-
+    // Prueba
 }
