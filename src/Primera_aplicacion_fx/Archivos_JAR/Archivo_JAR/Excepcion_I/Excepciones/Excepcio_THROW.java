@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 public class Excepcio_THROW {
     public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String mail = JOptionPane.showInputDialog(null, "Introducce el email: " ,"Introduce los datos", null);
+		String mail = JOptionPane.showInputDialog(null, "Introduce email");
 		try{
             examinaMail(mail);
         }catch(Exception e){
@@ -11,7 +11,7 @@ public class Excepcio_THROW {
         }
     }
 
-        static void examinaMail(String email) {
+        static void examinaMail(String email) throws Exception {
             int arroba = 0;
             boolean punto = false;
             String sin = "@";
@@ -19,7 +19,7 @@ public class Excepcio_THROW {
             
             String sin_punto = ".";
             char punto_sin = sin_punto.charAt(0);
-            if(email.length() <= 3) throws Exception{
+            if(email.length() <= 3) {
                 Exception mi_Excepcion = new Exception();
                 throw mi_Excepcion;
                 
