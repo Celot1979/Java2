@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Acceso_Ficheros_SubDirectorio {
     public static void main(String[] args){
-        File subdirectorio = new File("/Users/danielgil/Desktop/Material acceso");
+        File subdirectorio = new File(File.separator + "Users" + File.separator + "danielgil" +  File.separator +"Desktop" +  File.separator + "Material acceso");
         String[] archivos =subdirectorio.list();
         for(int i=0; i<archivos.length; i++){
             System.out.println(archivos[i]);
