@@ -5,7 +5,7 @@ import java.io.File;
 public class Acceso_fichero {
     public static void main(String[] args) {
 		// TODO Auto-generated method stub
-        File directorio = new File("/Users/danielgil/Desktop/Material acceso");
+        File directorio = new File(File.separator + "Users" + File.separator + "danielgil" +  File.separator +"Desktop" +  File.separator + "Material acceso");
         System.out.println(directorio.getAbsolutePath());
         System.out.println(directorio.exists());
         String [] archivo =directorio.list();
