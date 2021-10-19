@@ -1,7 +1,13 @@
-package ArrayList;
+package Programacion_Generica_Arrays;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+/*
+ * En está clase veremos el proceso de creación de un array a partir de un ArrayList creado con anterioridad.
+ */
 public class Convertir_ArrayList_Array {
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList <Empleados> losEmpleados = new ArrayList<Empleados>();
 		losEmpleados.add(new Empleados("Antonio",2300.5,2005,7,5));
@@ -41,6 +47,7 @@ public class Convertir_ArrayList_Array {
         	System.out.println(obj.getDatosEmpleado());
         } */
 	}
+
 }
 class Empleados{
 	public Empleados(String nom, double sue, int agno,int mes,int dia) {

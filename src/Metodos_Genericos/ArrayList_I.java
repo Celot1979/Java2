@@ -1,8 +1,12 @@
-package ArrayList;
+package Metodos_Genericos;
 
-public class ArrayList {
-    public static void main(String[] args){
-        // TODO Auto-generated method stub
+import java.util.GregorianCalendar;
+import java.util.*;
+
+public class ArrayList_I {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		/*Empleados[] losEmpleados= new Empleados[4];
 		losEmpleados[0]=new Empleados("Antonio",2300.5,2005,7,5);
 		losEmpleados[1]=new Empleados("Carlos",5000.5,2007,6,5);
@@ -48,7 +52,9 @@ public class ArrayList {
 		
 		for(Empleados obj: losEmpleados) {
 			System.out.println(obj.getDatosEmpleado() + " y un salario de: " + obj.getSueldo());
-    }
+		}
+	}
+
 }
 class Empleados{
 	public Empleados(String nom, double sue, int agno,int mes,int dia) {
