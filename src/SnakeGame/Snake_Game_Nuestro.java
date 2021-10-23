@@ -1,11 +1,16 @@
 package SnakeGame;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Random;
 public class Snake_Game_Nuestro {
 
 	public static void main(String[] args) {
@@ -23,7 +28,7 @@ class Snake extends JFrame{
 	public Snake() {
 		setTitle ("Juego_Mio_Snake");
 		setSize(width,height);
-		
+
 		/*
 		 * 1º Centramos el Frame en la mitad de la ventana.
 		 * Lo conseguimos pasando mediante la herramienta 
@@ -37,13 +42,15 @@ class Snake extends JFrame{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		//2º 
 		this.setLocation(dim.width/2 -width/2,dim.height/2-height/2 );
-		/* 9º Ahora que tenemos creado la propiedad que podemos usar en todas las clases.
-		 * puesto que la calse de JPanel es inter, y las propiedades
-		 * son manipulables por todas las clases; creamos el objeto Snake.
-		 * Este objeto se forma gracias a la lamina Imagen Sanake.
+		/* 9º Teniendo creado el punto ó objeto que se verá con snake, queda
+		 * instaciar ImagenSnake que es quien dibuja el obajeto en la lámina.
+		 * 
+		 * Posteriormente se sustituye el objeto Snake por el método starGame.
+		 * El motivo es que esté método contiene tanto el objeto snake como apple.
+		 * 
 		 */
 		
-		snake = new Point(width/2,height/2);
+		starGame();
 		ImagenSnake = new ImagenSnake();
 		
 		/*Importante: Para poder añadir al Frame el objeto creado en la lámina,
@@ -58,7 +65,28 @@ class Snake extends JFrame{
 		Momento momento = new Momento();
 		Thread trid = new Thread( momento);
 		trid.start();
+		
+		Categoria etapa = new Categoria();
+		Thread trid1 = new Thread(etapa);
+		trid1.start();
+		add(anotaciones, BorderLayout.NORTH);
 	}
+	
+	/*
+	 * 11º Una vez creado la propiedad Point apple, vamos a dibujarla en la lámina
+	 */
+	
+	 public void starGame() {
+		 apple = new Point(200,200);
+		 snake = new Point(width/2,height/2);
+		 //15.b. Instaciamos la lista. Posteriormente sumamos una serpiente a la lista.
+		 lista = new ArrayList<Point>();
+		 lista.add(snake);
+		 crearComida();
+	 }
+	
+	
+	
 	/*
 	 * 5º Creamos una clase interna para la parte gráfica.
 	 * Será una clase JPanel para pintar el punto
@@ -66,9 +94,29 @@ class Snake extends JFrame{
 	class ImagenSnake extends JPanel{
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
+			
+			/* 
+			 * 17º. Finalmente para que la serpiente vaya creaciendo, debemos actualizar
+			 * el dibuju de la misma. Eso lo haremos con un bucle for.
+			 */
 			g.setColor(Color.DARK_GRAY);
 			g.fillRect(snake.x, snake.y, widthPoint, heightPoint);
+			for(int i = 0; i < lista.size();i++) {
+				Point point = (Point)lista.get(i);
+				g.fillRect(point.x, point.y, widthPoint, heightPoint);
+			}
 			
+			
+			
+			g.setColor(Color.RED);
+			g.fillRect(apple.x, apple.y, widthPoint, heightPoint);
+			
+			if(gameOver) {
+				g.drawString("GAME OVER", 200,300);
+				String puntos= String.valueOf(puntuacion);
+				g.drawString(puntos, 250, 350);
+				g.drawString("PUNTUACIÓN", 100, 350);
+			}
 		}
 		
 		
@@ -92,22 +140,22 @@ class Snake extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				System.exit(0);
-			}else if(e.getKeyCode()== KeyEvent.VK_UP) {
-				if(direccion != KeyEvent.VK_DOWN) {
+			}else if(e.getKeyCode()== KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
+				if(direccion != KeyEvent.VK_DOWN || direccion != KeyEvent.VK_W) {
 					direccion = KeyEvent.VK_UP;
 				}
 				
-			}else if(e.getKeyCode()== KeyEvent.VK_DOWN) {
-				if(direccion != KeyEvent.VK_UP) {
+			}else if(e.getKeyCode()== KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+				if(direccion != KeyEvent.VK_UP || direccion != KeyEvent.VK_S) {
 					direccion = KeyEvent.VK_DOWN;
 				}
 				
-			}else if(e.getKeyCode()== KeyEvent.VK_LEFT) {
-				if(direccion != KeyEvent.VK_RIGHT) {
+			}else if(e.getKeyCode()== KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+				if(direccion != KeyEvent.VK_RIGHT || direccion != KeyEvent.VK_A) {
 					direccion = KeyEvent.VK_LEFT;
 				}
-			}else if(e.getKeyCode()== KeyEvent.VK_RIGHT) {
-				if(direccion != KeyEvent.VK_LEFT) {
+			}else if(e.getKeyCode()== KeyEvent.VK_RIGHT|| e.getKeyCode() == KeyEvent.VK_D) {
+				if(direccion != KeyEvent.VK_LEFT|| direccion != KeyEvent.VK_D) {
 					direccion = KeyEvent.VK_RIGHT;
 				}
 			}
@@ -121,6 +169,53 @@ class Snake extends JFrame{
 		}
 		
 	}
+	/*
+	 *  12º En este punto vamos a crear la aleatoridad de la comida.
+	 *  
+	 *  Luego el método vamos a inicializarlo en el método que dibuja amabas formas.
+	 */
+	public void crearComida() {
+		Random  rnd = new Random();
+		apple.x = rnd.nextInt(width);
+		if((apple.x%5 )>0) {
+			apple.x= apple.x-(apple.x % 5);
+		}
+		
+		if(apple.x < 5 ) {
+			apple.x= apple.x + 10;
+		}
+		apple.y = rnd.nextInt(height);
+		if((apple.y%5 )>0) {
+			apple.y= apple.y-(apple.y % 5);
+		}
+		
+		if(apple.y < 5 ) {
+			apple.y= apple.y + 10;
+		}
+		
+		puntuacion += 10;
+		
+		setLayout(new BorderLayout());
+		anotaciones = new JPanel();
+		nivel = new JLabel("NIVEL");
+		nivel_c= new JLabel ("");
+		nivel_c.setText(level);
+		
+		
+		puntuaciones = new JLabel("PUNTUACIONES: ");
+		
+		anotaciones.add(nivel);
+		anotaciones.add(nivel_c);
+		anotaciones.add(puntuaciones);
+		
+		
+		if(puntuacion > 30) {
+			System.out.print("Venga!!");
+			nivel_c.setText("1");
+			
+		}
+		
+	}
 	
 	/*
 	 * En esta clase interna creamos un hilo para poder darle movilida
@@ -129,49 +224,58 @@ class Snake extends JFrame{
 	public class Momento extends Thread{
 		long last= 0;
 		public void run() {
+			
 			while(true) {
+				subir_nivel();
 				if((java.lang.System.currentTimeMillis() - last)> frecuencia) {
 					/*En la siguiente instrucción es para saber para donde se está moviendo
-					 * Pues tenemos que tener un punto de unión entre un hilo y el otro.
+					 * Pues tenemos que tener un punto de unión entre un hilo y la otra parte del programa.
 					 */
-					if(direccion == KeyEvent.VK_UP) {
-						snake.y = snake.y - heightPoint ;
-						if(snake.y < 0) {
-							snake.y = height- heightPoint;
-						}
-						
-						if(snake.y > height) {
-							snake.y = 0;
-						}
-					}else if (direccion == KeyEvent.VK_DOWN) {
-						snake.y = snake.y + heightPoint ;
-						if(snake.y < 0) {
-							snake.y = height- heightPoint;
-						}
-						
-						if(snake.y > height) {
-							snake.y = 0;
-						}
-					}else if (direccion == KeyEvent.VK_LEFT) {
-						snake.x = snake.x - widthPoint ;
-						if(snake.x < 0) {
-							snake.x = width- widthPoint;
-						}
-						
-						if(snake.x > width) {
-							snake.x = 0;
-						}
-					}else if (direccion == KeyEvent.VK_RIGHT) {
-						snake.x = snake.x + widthPoint ;
-						if(snake.x < 0) {
-							snake.x = width + widthPoint;
-						}
-						
-						if(snake.x > width) {
-							snake.x = 0;
-						}
-					}
 					
+					/*
+					 *  18.c. En caso que sea gameOver, paramos de desplazar el punto.
+					 *  
+					 */
+					 if(!gameOver) {
+						 if(direccion == KeyEvent.VK_UP) {
+								snake.y = snake.y - heightPoint ;
+								if(snake.y < 0) {
+									snake.y = height- heightPoint;
+								}
+								
+								if(snake.y > height) {
+									snake.y = 0;
+								}
+							}else if (direccion == KeyEvent.VK_DOWN) {
+								snake.y = snake.y + heightPoint ;
+								if(snake.y < 0) {
+									snake.y = height- heightPoint;
+								}
+								
+								if(snake.y > height) {
+									snake.y = 0;
+								}
+							}else if (direccion == KeyEvent.VK_LEFT) {
+								snake.x = snake.x - widthPoint ;
+								if(snake.x < 0) {
+									snake.x = width- widthPoint;
+								}
+								
+								if(snake.x > width) {
+									snake.x = 0;
+								}
+							}else if (direccion == KeyEvent.VK_RIGHT) {
+								snake.x = snake.x + widthPoint ;
+								if(snake.x < 0) {
+									snake.x = width + widthPoint;
+								}
+								
+								if(snake.x > width) {
+									snake.x = 0;
+								}
+							}
+					 }
+
 					
 					actualizar();
 					last = java.lang.System.currentTimeMillis();
@@ -180,17 +284,90 @@ class Snake extends JFrame{
 		}
 		public void actualizar() {
 			ImagenSnake.repaint();
+			
+			/*
+			 *  16º. En la siguiente línea, vamos a ir cambiando cual es el 1º punto.
+			 */
+			
+			lista.add(0,new Point(snake.x,snake.y));
+			lista.remove(lista.size()-1);
+			
+			
+			/*
+			 * 18º. Debemos de crear un bucle para que al tocarse la serpiente,  muera.
+			 */
+			
+			  for(int i = 1; i < lista.size();i++) {
+				  Point punto = lista.get(i);
+				  if(snake.x == punto.x && snake.y == punto.y){
+					  gameOver = true;
+				  }
+				  
+			  }
+			
+			
+			/*
+			 * 14º. Dentro del método actualizar, crearemos un condicional que será
+			 * el responsable de fijar que ocurre cuando ambos colisionan, ó lo que es
+			 * lo mismo, cuando la serpiente come la manzana.
+			 */
+			
+			if((snake.x > (apple.x - 10)) && (snake.x < (apple.x + 10)) && (snake.y > (apple.y - 10))  && (snake.y < (apple.y + 10))){
+				// 15.c Aquí es donde realmente hacemos que se sume un punto más a la serpiente- haciéndola crecer-.
+				lista.add(0,new Point(snake.x,snake.y));
+				crearComida();
+				
+			}
+			
+			
 		}
 	}
+	public class Categoria extends Thread{
+		public void run() {
+			subir_nivel();
+		}
+	}
+	
+	public void subir_nivel() {
+		
+		while(puntuacion == 0) {
+			
+			if( puntuacion > 50) {
+				frecuencia = 150;
+				
+			}else if(puntuacion > 100) {
+				frecuencia = 200;
+				
+				
+			}else if(puntuacion > 150) {
+				frecuencia = 300;
+				
+			}
+		}
+		
+		
+		
+		
+	}
+	
+	
 
 	
 	
 	
-	int width =640;
-	int height = 480;
+	int width =1920;
+	int height =1080;
 	//------------------------------------------------------------------------------
-	//Creamos esta propiedad para poder comenzar a crear el objeto
+	//Creamos esta propiedad para dibujar ambos puntos. 1º La serpiente y luego la manzana
 	Point snake;
+	Point apple;
+	//------------------------------------------------------------------------------
+	// 18.bº Creamos la varibale gameOver.
+	
+	boolean gameOver=false;
+	
+	
+	
 	//------------------------------------------------------------------------------
 	// 6º Creamos 3 propiedades para darle una localización en el metodo que pinta
 	// en el JPanel
@@ -206,7 +383,32 @@ class Snake extends JFrame{
 	 * los movimientos que realicemos mediante las teclas.
 	 */
 	int direccion = KeyEvent.VK_LEFT;
-	long frecuencia = 20;
+	long frecuencia = 50;
+	
+	/*
+	 * 15º. Debemos crear una lista como propiedad que vaya creciendo cada vez que se tope
+	 * con el punto. De esa forma va creciendo la serpiente.
+	 */
+	ArrayList<Point> lista = new ArrayList<Point>();
+	
+	/* 
+	 * Puntuación!!!!
+	 */
+	int puntuacion = 0;
+
+	
+	/*
+	 * Nivel
+	 */
+	String level ;
+	/*
+	 * Crearemos un nuevo JPanel para crear una zona de marcador.
+	 */
+	JPanel anotaciones;
+	JLabel nivel, puntuaciones,nivel_c;
+	JTextField puntuaciones_c;
+	
+	
 }
 
 
