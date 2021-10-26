@@ -66,10 +66,6 @@ class Snake extends JFrame{
 		Thread trid = new Thread( momento);
 		trid.start();
 		
-		Categoria etapa = new Categoria();
-		Thread trid1 = new Thread(etapa);
-		trid1.start();
-		add(anotaciones, BorderLayout.NORTH);
 	}
 	
 	/*
@@ -160,6 +156,7 @@ class Snake extends JFrame{
 				}
 			}
 			
+		
 		}
 
 		@Override
@@ -195,26 +192,52 @@ class Snake extends JFrame{
 		
 		puntuacion += 10;
 		
+		System.out.println(puntuacion);
 		setLayout(new BorderLayout());
-		anotaciones = new JPanel();
-		nivel = new JLabel("NIVEL");
-		nivel_c= new JLabel ("");
-		nivel_c.setText(level);
+		JPanel superior = new JPanel();
+		nivel_cartel = new JLabel("N I V E L : ");
+		nivel_cartel_resultado= new JLabel("");
 		
 		
-		puntuaciones = new JLabel("PUNTUACIONES: ");
-		
-		anotaciones.add(nivel);
-		anotaciones.add(nivel_c);
-		anotaciones.add(puntuaciones);
+		espacio1= new JLabel("<|        SNAKE         |>");
 		
 		
-		if(puntuacion > 30) {
-			System.out.print("Venga!!");
-			nivel_c.setText("1");
+		puntuaciones = new JLabel("P U N T U A C I O N : ");
+		puntuacion_cartel= new JLabel("");
+		
+		superior.add(nivel_cartel);
+		superior.add(nivel_cartel_resultado);
+		superior.add(espacio1);
+		superior.add(puntuaciones);
+		superior.add(puntuacion_cartel);
+		
+		
+		add(superior,BorderLayout.NORTH);
+		//Marcador de puntos
+		int resultado = Integer.valueOf(puntuacion);
+		prueba = resultado+"";
+		puntuacion_cartel.setText(prueba);
+		nivel = "0";
+		
+		
+		////Marcador de nivel
+		
+			if(puntuacion <30) nivel = "0";
+			else if (puntuacion == 30) nivel = "1";
+			else if (puntuacion > 100 || puntuacion < 150) nivel = "2";
+			else if (puntuacion == 150) nivel = "2";
+				
 			
-		}
-		
+			nivel_cartel_resultado.setText(nivel);
+			
+			/*
+			 * 1ºHay que seguir poniendo las condicioneales para ir subiendo el nivel
+			 * 
+			 * 2º Después crear una variable record. El último resultado se almacena en esa variable.
+			 * Una vez que se almacena en esa variable hay que almacenarla en un array, para que leugo podamos compararla con el siguiente resultado..
+			 *
+			 */
+
 	}
 	
 	/*
@@ -226,7 +249,7 @@ class Snake extends JFrame{
 		public void run() {
 			
 			while(true) {
-				subir_nivel();
+				
 				if((java.lang.System.currentTimeMillis() - last)> frecuencia) {
 					/*En la siguiente instrucción es para saber para donde se está moviendo
 					 * Pues tenemos que tener un punto de unión entre un hilo y la otra parte del programa.
@@ -322,39 +345,8 @@ class Snake extends JFrame{
 			
 		}
 	}
-	public class Categoria extends Thread{
-		public void run() {
-			subir_nivel();
-		}
-	}
-	
-	public void subir_nivel() {
-		
-		while(puntuacion == 0) {
-			
-			if( puntuacion > 50) {
-				frecuencia = 150;
-				
-			}else if(puntuacion > 100) {
-				frecuencia = 200;
-				
-				
-			}else if(puntuacion > 150) {
-				frecuencia = 300;
-				
-			}
-		}
-		
-		
-		
-		
-	}
-	
 	
 
-	
-	
-	
 	int width =1920;
 	int height =1080;
 	//------------------------------------------------------------------------------
@@ -394,24 +386,19 @@ class Snake extends JFrame{
 	/* 
 	 * Puntuación!!!!
 	 */
-	int puntuacion = 0;
+	int puntuacion = -10;
 
-	
 	/*
 	 * Nivel
 	 */
-	String level ;
-	/*
-	 * Crearemos un nuevo JPanel para crear una zona de marcador.
-	 */
-	JPanel anotaciones;
-	JLabel nivel, puntuaciones,nivel_c;
-	JTextField puntuaciones_c;
 	
+	 String nivel = "";
+	 String prueba;
+	 
+	 /*
+	  * Gráficos
+	  */
+	
+	 JLabel puntuaciones, puntuacion_cartel, nivel_cartel,nivel_cartel_resultado,espacio,espacio1,espacio2;
 	
 }
-
-
-
-
-
