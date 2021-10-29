@@ -415,7 +415,7 @@ class Snake extends JFrame{
 	 * 
 	 * En el Array volveremos a buscar el resultado más alto, y se sacará por pantalla como record.
 	 * 
-	 * 
+	 * Que rraro todo
 	 * Nota*: Dar una vuelta a REalizar un JTable para que salga los resultados al final de la partida con todos aquellos que han jugado.
 	 * Eso hace también darle una vuelta en implementar un JTextField con su variable para poder almacenarla y pasarsela al archivo.write.
 	 */
