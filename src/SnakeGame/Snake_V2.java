@@ -1,28 +1,21 @@
 package SnakeGame;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Random;
-public class Snake_Game_Nuestro {
-
-	public static void main(String[] args) {
+public class Snake_V2 {
+    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Snake s = new Snake();
 		s.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
         
 	}
-	
-	
-	
-
+    
 }
 class Snake extends JFrame{
 	public Snake() {
@@ -66,7 +59,12 @@ class Snake extends JFrame{
 		Thread trid = new Thread( momento);
 		trid.start();
 		
+		
+		
+		
 	}
+	
+	
 	
 	/*
 	 * 11º Una vez creado la propiedad Point apple, vamos a dibujarla en la lámina
@@ -79,6 +77,7 @@ class Snake extends JFrame{
 		 lista = new ArrayList<Point>();
 		 lista.add(snake);
 		 crearComida();
+		 
 	 }
 	
 	
@@ -108,15 +107,20 @@ class Snake extends JFrame{
 			g.fillRect(apple.x, apple.y, widthPoint, heightPoint);
 			
 			if(gameOver) {
-				g.drawString("GAME OVER", 200,300);
-				String puntos= String.valueOf(puntuacion);
+				g.drawString("G  A  M  E    O  V  E  R", 100,300);
+				puntos= String.valueOf(puntuacion);
+				g.drawString("P U N T U A C I Ó N", 100, 350);
 				g.drawString(puntos, 250, 350);
-				g.drawString("PUNTUACIÓN", 100, 350);
+				g.drawString("R E C O R D", 100, 400);
+				
+				final_p = String.valueOf(ultimo);
+				g.drawString(final_p, 250, 400);
+				
 			}
+			
+			
+			
 		}
-		
-		
-		
 	}
 	
 	/* 3º Creamos una clase interna a la escucha de un evento en el teclado.
@@ -135,6 +139,7 @@ class Snake extends JFrame{
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				lista_resultados();
 				System.exit(0);
 			}else if(e.getKeyCode()== KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 				if(direccion != KeyEvent.VK_DOWN || direccion != KeyEvent.VK_W) {
@@ -192,7 +197,7 @@ class Snake extends JFrame{
 		
 		puntuacion += 10;
 		
-		System.out.println(puntuacion);
+		//System.out.println(puntuacion);
 		setLayout(new BorderLayout());
 		JPanel superior = new JPanel();
 		nivel_cartel = new JLabel("N I V E L : ");
@@ -217,26 +222,83 @@ class Snake extends JFrame{
 		int resultado = Integer.valueOf(puntuacion);
 		prueba = resultado+"";
 		puntuacion_cartel.setText(prueba);
+		Total_puntos.add(resultado);
+		ultimo = Total_puntos.get(Total_puntos.size()-1);
+		//System.out.println("Este es el resultado del último digito almacenado en el ARRAY: " + ultimo);
 		nivel = "0";
-		
-		
+
 		////Marcador de nivel
 		
-			if(puntuacion <30) nivel = "0";
-			else if (puntuacion == 30) nivel = "1";
-			else if (puntuacion > 100 || puntuacion < 150) nivel = "2";
-			else if (puntuacion > 150) nivel = "3";
+
+			if(puntuacion < 10) {
+			nivel = "0";
+			}
+			if(puntuacion >= 10 && puntuacion <=50) {
+				nivel = "1";
+			}
+			
+			if(puntuacion > 50 && puntuacion <=100) {
+				nivel = "2";
+			}
+			
+			if(puntuacion > 100 && puntuacion <=200) {
+				nivel = "3";
+			}
+			if(puntuacion > 200 && puntuacion <=400) {
+				
+				nivel = "4";
+			}
+			if(puntuacion > 400 && puntuacion <=800) {
+				
+				nivel = "5";
+			}
+			if(puntuacion > 800 && puntuacion <=1600) {
+				
+				nivel = "6";
+			}
+			if(puntuacion > 1600 && puntuacion <=3200) {
+				
+				nivel = "7";
+			}
+			if(puntuacion > 3200 && puntuacion <=6400) {
+				
+				nivel = "8";
+			}
 				
 			
 			nivel_cartel_resultado.setText(nivel);
 			
-			/*
-			 * 1ºHay que seguir poniendo las condicioneales para ir subiendo el nivel
-			 * 
-			 * 2º Después crear una variable record. El último resultado se almacena en esa variable.
-			 * Una vez que se almacena en esa variable hay que almacenarla en un array, para que leugo podamos compararla con el siguiente resultado..
-			 *
-			 */
+			
+			//Frecuencia del nivel:
+			switch(puntuacion) {
+			case 50:
+				frecuencia = 48;
+				//System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+			case 100:
+				frecuencia = 45;
+				//System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+			case 200:
+				frecuencia = 40;
+				//System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+			case 300:
+				frecuencia = 38;
+				System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+			case 400:
+				frecuencia = 35;
+				//System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+			case 600:
+				frecuencia = 30;
+				//System.out.println("Comenzamos a tener más velocidad " + frecuencia);
+				break;
+				
+			}
+			
+			
 
 	}
 	
@@ -325,7 +387,7 @@ class Snake extends JFrame{
 				  if(snake.x == punto.x && snake.y == punto.y){
 					  gameOver = true;
 				  }
-				  
+				 
 			  }
 			
 			
@@ -344,7 +406,52 @@ class Snake extends JFrame{
 			
 			
 		}
+		
 	}
+	/*
+	 * En el método (lista_resultados) es el encagardo de escribir en un archivot txt los resultados de la partida.
+	 * 
+	 * La idea es que se archiven en él; posteriormente se puedan leer y pasar a un ArrayList. 
+	 * 
+	 * En el Array volveremos a buscar el resultado más alto, y se sacará por pantalla como record.
+	 * 
+	 * 
+	 * Nota*: Dar una vuelta a REalizar un JTable para que salga los resultados al final de la partida con todos aquellos que han jugado.
+	 * Eso hace también darle una vuelta en implementar un JTextField con su variable para poder almacenarla y pasarsela al archivo.write.
+	 */
+    public void lista_resultados() {
+    	try {
+			BufferedWriter archivo= new BufferedWriter(new FileWriter("/Users/danielgil/Desktop/Curso_Java/Proyectos personales/src/SnakeGame/Ficheros/Resultados.txt",true));
+			 String nombre = "Dani";//archivo.append("\n");
+			//System.out.println("Archivo creado  correctamente");
+			archivo.write(nombre + "--" +final_p);
+			archivo.flush();
+			//System.out.println("Se ha escrito  correctamente");
+			archivo.append("\n");
+			//System.out.println("Se ha dado un salto de línea correctamente");
+			//archivo.flush();
+			//System.out.println("Se ha añadido  correctamente");
+			archivo.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No se ha creado!!!!");
+		}
+    }
+    /*if(gameOver) {
+		try {
+			FileWriter escribir = new FileWriter("/Users/danielgil/Desktop/Curso_Java/Proyectos personales/src/SnakeGame/Ficheros/Resultados.txt",true);
+			System.out.println("Se ha creado el Fichero");
+			escribir.write(final_p);
+			System.out.println("Se ha ESCRITO CORRECTAMENTE!!!!!!!!");
+			escribir.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("HA FRACASADO TODO");
+		}
+	}*/
+	
 	
 
 	int width =1920;
@@ -387,18 +494,29 @@ class Snake extends JFrame{
 	 * Puntuación!!!!
 	 */
 	int puntuacion = -10;
+	int ultimo;
 
 	/*
 	 * Nivel
 	 */
 	
 	 String nivel = "";
-	 String prueba;
+	 String prueba,final_p,puntos;
 	 
 	 /*
 	  * Gráficos
 	  */
 	
 	 JLabel puntuaciones, puntuacion_cartel, nivel_cartel,nivel_cartel_resultado,espacio,espacio1,espacio2;
-	
+	 
+	 
+	 /*
+	  * ArrayList para alamacenar los puntuaciones
+	  */
+	 ArrayList<Integer> Total_puntos = new ArrayList<Integer>();
 }
+
+
+
+
+
