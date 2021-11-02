@@ -1,29 +1,21 @@
-package Tres_En_Raya;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Random;
+package SnakeGame.Tres
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+
+En Raya;
 
 public class Tres_En_Raya {
-
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		marco m = new marco();
 		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 }
-class marco extends JFrame{
-	public marco() {
-		setTitle("Tres en Raya");
+class marco extends JFrame {
+    public marco(){
+        setTitle("Tres en Raya");
 		setBounds(800,400,250,180);
 		principal = new JPanel();
 		cuadrante = new GridLayout(3,3);
@@ -50,14 +42,9 @@ class marco extends JFrame{
 		
 		
 		setVisible(true);
-		
-	}
-	JPanel principal;
+    }
+    JPanel principal;
 	GridLayout cuadrante;
 	JButton b1,b2,b3,b4,b5,b6,b7,b8,b9;
 	
 }
-
-
-
-

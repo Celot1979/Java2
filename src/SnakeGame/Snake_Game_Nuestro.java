@@ -1,4 +1,4 @@
-package SnakeGame;
+package SnakeGame.Snake;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
