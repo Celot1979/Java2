@@ -1,4 +1,5 @@
-package SnakeGame.Tres En Raya;
+package Tres_En_Raya;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,8 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,52 +36,50 @@ public class Tres_En_Raya {
 
 }
 class marco extends JFrame{
-     public marco() {
-         setTitle("Tres en Raya");
-         setBounds(800,400,300,240);
-         principal = new JPanel();
-         encuadre= new GridLayout(3,3);
-         setLayout(encuadre);
-         Jugador1 uno = new Jugador1();
-         Jugador2 dos = new Jugador2();
+    public marco() {
+        setTitle("Tres en Raya");
+        setBounds(800,400,300,240);
+        principal = new JPanel();
+        encuadre= new GridLayout(3,3);
+        setLayout(encuadre);
+        Jugador1 uno = new Jugador1();
+        Jugador2 dos = new Jugador2();
          //valorDado = Integer.parseInt(JOptionPane.showInputDialog("Eres el jugador 1 o 2"));
-         b0= new JButton("");
-         Dimension d = new Dimension(10,10);
-         b0.setFont(new Font ("Arial",Font.BOLD,30));
-         b0.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 4, 
-Color.BLUE));
-         b0.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 // TODO Auto-generated method stub
-                 if(e.getSource() == b0 ) {
-                	valorDado+=1;
-                	if(valorDado == 1) {
-                		uno.jugada1(b0);
-                		
-                	
-                		//valorDado = Integer.parseInt(JOptionPane.showInputDialog("Eres el jugador 1 o 2"));
-                	}else {
-                		dos.jugada2(b0);
-                		//valorDado = Integer.parseInt(JOptionPane.showInputDialog("Eres el jugador 1 o 2"));
-                	}
-                 }
-                 b0.setEnabled(false);
-                 
-             }
-         });
 
-         b2= new JButton("");
-         b2.setFont(new Font ("Arial",Font.BOLD,30));
-         b2.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 4, 
-Color.BLUE));
-         b2.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 // TODO Auto-generated method stub
-            	 valorDado+=1;
-            	 if(e.getSource() == b2 ) {
-                 	if(valorDado == 1) {
+        b0= new JButton("");
+        Dimension d = new Dimension(10,10);
+        b0.setFont(new Font ("Arial",Font.BOLD,30));
+        b0.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 4, Color.BLUE));
+        b0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if(e.getSource() == b0 ) {
+                    valorDado+=1;
+                    if(valorDado == 1) {
+                        uno.jugada1(b0);          
+
+                		//valorDado = Integer.parseInt(JOptionPane.showInputDialog("Eres el jugador 1 o 2"));
+                    }else {
+                        dos.jugada2(b0);
+                		//valorDado = Integer.parseInt(JOptionPane.showInputDialog("Eres el jugador 1 o 2"));
+                    }
+                }
+                b0.setEnabled(false);
+                    
+            }
+        });
+
+        b2= new JButton("");
+        b2.setFont(new Font ("Arial",Font.BOLD,30));
+        b2.setBorder(BorderFactory.createMatteBorder(0, 0, 4, 4, Color.BLUE));
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             // TODO Auto-generated method stub
+            	valorDado+=1;
+            	if(e.getSource() == b2 ) {
+                  if(valorDado == 1) {
                  		uno.jugada1(b2);
                  		
                  	}else {
@@ -250,6 +256,9 @@ Color.BLUE));
 
          });
          
+         
+        
+         
          add(b0);
          add(b2);
          add(b3);
@@ -265,6 +274,30 @@ Color.BLUE));
          setVisible(true);
 
      }
+     public void ReproducirSonido(){
+         try {
+          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("/Users/danielgil/Desktop/Curso_Java/Proyectos personales/src/Tres_En_Raya/tiro.wav").getAbsoluteFile());
+          Clip clip = null;
+		try {
+			clip = AudioSystem.getClip();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+          try {
+			clip.open(audioInputStream);
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+          clip.start();
+         } catch(UnsupportedAudioFileException  ex) {
+           System.out.println("Error al reproducir el sonido.");
+         }catch(IOException e) {
+        	 
+         }
+       }
+     
      public class Jugador1{
     	 public Jugador1() {
     		 
@@ -369,7 +402,9 @@ Color.BLUE));
     		 
     		 
     		 if(contadorX == 3 && GameOver == true) {
-    			 JOptionPane.showMessageDialog(null, "Has ganado el 1º Jugador");
+    			 ReproducirSonido();
+    			 JOptionPane.showMessageDialog(null, "Ha ganado el 1º Jugador");
+    			 
     		 }
     		 
     		 
@@ -481,7 +516,9 @@ Color.BLUE));
     			 
     		 }
     		 if(contadorO == 3 && GameOver == true) {
-    			 JOptionPane.showMessageDialog(null, "Has ganado El 2º Jugador");
+    			 ReproducirSonido();
+    			 JOptionPane.showMessageDialog(null, "Ha ganado El 2º Jugador");
+    			
     		 }
     		 valorDado = 0; 
     	 }
