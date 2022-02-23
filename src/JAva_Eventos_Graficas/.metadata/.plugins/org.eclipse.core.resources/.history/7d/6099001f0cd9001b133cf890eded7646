@@ -1,0 +1,10 @@
+package Eventos_X_Multiples_Fuentes;
+
+public class Multiples {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

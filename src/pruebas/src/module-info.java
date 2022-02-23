@@ -1,0 +1,3 @@
+module pruebas {
+	requires freetts;
+}
