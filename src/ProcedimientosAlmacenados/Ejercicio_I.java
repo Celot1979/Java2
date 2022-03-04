@@ -1,6 +1,6 @@
 
 
-package P.Almacenados_I;
+package ProcedimientosAlmacenados;
 import java.sql.*;
 
 public class Ejercicio_I {
