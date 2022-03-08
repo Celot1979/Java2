@@ -1,5 +1,4 @@
-package ProcedimientosAlmacenados;
-
+package P.Almacenados_I;
 /*
  *  En el 2º Ejecicio de esta unidad, pretendemos pasrle una parámetro a la función construida en el gestor de BBDD. Después crearemos 
  *  el código necesario para realizar la consulta desde un programa de Java.
@@ -95,13 +94,15 @@ public class Ejercicio_II extends JFrame {
 		
 		try {
 			Connection miConexion = DriverManager.getConnection("jdbc:postgresql://localhost:5433/prueba","postgres","1234");
-			CallableStatement miStatement = miConexion.prepareCall("{CALL Actualizar(?,?)}");
-			miStatement.setString(1,textField2.getText());
-			miStatement.setString(2,textField1.getText());
+			CallableStatement miStatement = miConexion.prepareCall("{CALL ACTUALIZAR(?,?)}");
+			miStatement.setString(1,textField1.getText());
+			miStatement.setString(2,textField2.getText());
 			miStatement.execute();
 			
 			JOptionPane.showMessageDialog(null, "Se actualizado con éxito");
 			miConexion.close();
+			textField1.setText(" ");
+			textField2.setText(" ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "Error en la actualización");
@@ -109,6 +110,7 @@ public class Ejercicio_II extends JFrame {
 		}
 		
 	}
+	
 }
 class LaminaImagen extends JPanel{
 

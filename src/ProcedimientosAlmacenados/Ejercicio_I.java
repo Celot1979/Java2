@@ -1,8 +1,8 @@
-
-
-package ProcedimientosAlmacenados;
+package P.Almacenados_I;
 import java.sql.*;
-
+/*
+ *  Est es la la parte de programación en Java. Se ha realizado un trabajo previo, la creación en el gestor de BBDD de una función que arroje un resultado de una consulta.
+ */
 public class Ejercicio_I {
 
 	public static void main(String[] args) {
@@ -26,4 +26,3 @@ public class Ejercicio_I {
 	}
 
 }
-
