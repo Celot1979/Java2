@@ -28,3 +28,10 @@ para discernir que comportamiento debe de tener en caso de escoger un Item del C
 	           
 "
 
+ediccion = Al ComboBox creado con anterioridad.
+Según la APPI 
+getSelectionModel() = Obtiene el valor de la propiedad selectionModel.Es decir, que toma el valor de lo seleccionado del ComboBox.
+selectedItemProperty() = Es un método de la calse Model(). Que a su vez es heredada por ComboBox.
+Según la API Se refiere a la propiedad de elemento seleccionado, que se utiliza para indicar el elemento seleccionado actualmente en el modelo de selección.
+Es decir, se refiere al comportamiento de lo seleccionado y al elemento seleccionado.
+
