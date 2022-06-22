@@ -1,0 +1,30 @@
+Se constuye un método - justo después de  la creación del ComBox- que interacciona con la clase Acciones- que es la que gestiona el comportamiento del objeto Acciones- 
+para discernir que comportamiento debe de tener en caso de escoger un Item del Combo .
+
+" ediccion.getSelectionModel().selectedItemProperty().addListener(( operacion,t,t1) -> {
+				try {
+					if(t1.getTipo_Operacion().equals("Sumar")) {
+						campo3.setText(t1.sumar(campo1.getText(), campo2.getText()));
+						System.out.println(operacion.getValue());
+						
+						
+					}else if(t1.getTipo_Operacion().equals("Restar")) {
+						campo3.setText(t1.restar(campo1.getText(), campo2.getText()));
+						System.out.println(operacion.getValue());
+					}else if(t1.getTipo_Operacion().equals("Multiplicar")) {
+						campo3.setText(t1.multiplicar(campo1.getText(), campo2.getText()));
+						System.out.println(operacion.getValue());
+					
+					}else if(t1.getTipo_Operacion().equals("Dividir")) {
+						campo3.setText(t1.dividir(campo1.getText(), campo2.getText()));
+						System.out.println(operacion.getValue());
+					
+					}
+				}catch(Exception e) {
+					System.out.print("Cagada");
+				}
+				
+	           
+	           
+"
+
