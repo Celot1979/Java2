@@ -35,7 +35,7 @@ TreeItem rootItem = new TreeItem("Peliculas");
 ```java
 
 * Creamos los subnodos principales. Colgaran de la raíz principal.
-```
+
 	TreeItem Peliculas_Belicas = new TreeItem("Peliculas Bélicas",imagen);
   //Añadimos  a Peliculas Bélicas sus hijos
 	Peliculas_Belicas.getChildren().add(new TreeItem("Salvar al soldado Ryan"));
