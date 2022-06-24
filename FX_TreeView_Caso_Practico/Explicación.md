@@ -15,3 +15,5 @@ visible la raíz
 ```java
 TreeItem rootItem = new TreeItem("Peliculas");
 ```
+* Antes de proseguir la creación de los subnodos que colgaran de la raíz principal, crearemos los objetos de imagen.
+  Estos serán lo que se implementen en los contructores de los subnodos principales (hijos).
