@@ -14,6 +14,55 @@ Como podemos comprobar en la interfz no sale
 visible la raíz
 ```java
 TreeItem rootItem = new TreeItem("Peliculas");
-```
+```java
 * Antes de proseguir la creación de los subnodos que colgaran de la raíz principal, crearemos los objetos de imagen.
   Estos serán lo que se implementen en los contructores de los subnodos principales (hijos).
+```
+      Image icon = new Image(getClass().getResourceAsStream("/img/gu_3.png"));
+			ImageView imagen = new ImageView(icon);
+			
+			Image icon2 = new Image(getClass().getResourceAsStream("/img/fam.png"));
+			ImageView imagen2 = new ImageView(icon2);
+			
+			Image icon3 = new Image(getClass().getResourceAsStream("/img/inf.png"));
+			ImageView imagen3= new ImageView(icon3);
+			
+			Image icon4 = new Image(getClass().getResourceAsStream("/img/com.png"));
+			ImageView imagen4= new ImageView(icon4);
+			
+			Image icon5 = new Image(getClass().getResourceAsStream("/img/dra.png"));
+			ImageView imagen5= new ImageView(icon4);
+```java
+
+* Creamos los subnodos principales. Colgaran de la raíz principal.
+```
+	TreeItem Peliculas_Belicas = new TreeItem("Peliculas Bélicas",imagen);
+  //Añadimos  a Peliculas Bélicas sus hijos
+	Peliculas_Belicas.getChildren().add(new TreeItem("Salvar al soldado Ryan"));
+	Peliculas_Belicas.getChildren().add(new TreeItem("La chaqueta metálica"));
+	Peliculas_Belicas.getChildren().add(new TreeItem("Apocalipse now"));
+  TreeItem Peliculas_Familiares = new TreeItem("Peliculas Familiares",imagen2);
+  TreeItem Infantiles = new TreeItem("Peliculas Infantiles",imagen3);
+  TreeItem Comedia= new TreeItem("Comedia",imagen4);
+  // Opciones de los subdirectorio Infantiles y Comedia
+	Infantiles.getChildren().add(new TreeItem("Fantasia"));
+	Infantiles.getChildren().add(new TreeItem("Toy Story"));
+	Comedia.getChildren().add(new TreeItem("No me chilles que no te veo"));
+	Comedia.getChildren().add(new TreeItem("La vida de Bryan"));
+			
+			
+	Peliculas_Familiares.getChildren().add(Infantiles);
+	Peliculas_Familiares.getChildren().add(Comedia);
+	Peliculas_Familiares.getChildren().add(new TreeItem("Los visitantes"));
+	Peliculas_Familiares.getChildren().add(new TreeItem("E.T"));
+			
+  TreeItem Peliculas_Drama = new TreeItem("Peliculas Drama",imagen5);
+  Peliculas_Drama.getChildren().add(new TreeItem("Heat"));
+	Peliculas_Drama.getChildren().add(new TreeItem("Bailando con lobos"));
+	Peliculas_Drama.getChildren().add(new TreeItem("Gran Torino"));
+  //Se añaden a la raíz
+  rootItem.getChildren().add(Peliculas_Belicas);
+  rootItem.getChildren().addAll(Peliculas_Familiares);
+  rootItem.getChildren().add(Peliculas_Drama);
+
+```
