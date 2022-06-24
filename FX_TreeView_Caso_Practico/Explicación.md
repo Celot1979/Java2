@@ -3,7 +3,8 @@
 ## Objetivos del proyecto
 El proyecto se realiza para la practica de la contrucción de un componente - TreeView - con Java Fx. Como plus, se ha elegido implementar unos iconos en los Nodos principales.
 En la funcionalidad de cada - TreeItem - emergerá una nueva ventana que nos anunciará la pelicula7 género escogido. Además, en la parte inferior de la 1ª ventana podremos ver también el titulo.
-
+* Crear un paquete en la carpeta src para las ventanas emergentes.
+* Paquete que contenga las imágenes de los iconos.
 
 <img width="600" alt="Captura de pantalla 2022-06-24 a las 19 05 15" src="https://user-images.githubusercontent.com/67976795/175609312-11a70df2-4361-4ff0-b789-7f0257a93809.png">
 <img width="599" alt="Captura de pantalla 2022-06-24 a las 19 05 31" src="https://user-images.githubusercontent.com/67976795/175609327-c384717a-bc60-450e-9b09-4831c2b9a01c.png">
@@ -19,19 +20,19 @@ TreeItem rootItem = new TreeItem("Peliculas");
   Estos serán lo que se implementen en los contructores de los subnodos principales (hijos).
 ```
       Image icon = new Image(getClass().getResourceAsStream("/img/gu_3.png"));
-			ImageView imagen = new ImageView(icon);
+      ImageView imagen = new ImageView(icon);
 			
-			Image icon2 = new Image(getClass().getResourceAsStream("/img/fam.png"));
-			ImageView imagen2 = new ImageView(icon2);
+      Image icon2 = new Image(getClass().getResourceAsStream("/img/fam.png"));
+      ImageView imagen2 = new ImageView(icon2);
 			
-			Image icon3 = new Image(getClass().getResourceAsStream("/img/inf.png"));
-			ImageView imagen3= new ImageView(icon3);
+      Image icon3 = new Image(getClass().getResourceAsStream("/img/inf.png"));
+      ImageView imagen3= new ImageView(icon3);
 			
-			Image icon4 = new Image(getClass().getResourceAsStream("/img/com.png"));
-			ImageView imagen4= new ImageView(icon4);
+      Image icon4 = new Image(getClass().getResourceAsStream("/img/com.png"));
+      ImageView imagen4= new ImageView(icon4);
 			
-			Image icon5 = new Image(getClass().getResourceAsStream("/img/dra.png"));
-			ImageView imagen5= new ImageView(icon4);
+      Image icon5 = new Image(getClass().getResourceAsStream("/img/dra.png"));
+      ImageView imagen5= new ImageView(icon4);
 ```java
 
 * Creamos los subnodos principales. Colgaran de la raíz principal.
@@ -41,10 +42,10 @@ TreeItem rootItem = new TreeItem("Peliculas");
 	Peliculas_Belicas.getChildren().add(new TreeItem("Salvar al soldado Ryan"));
 	Peliculas_Belicas.getChildren().add(new TreeItem("La chaqueta metálica"));
 	Peliculas_Belicas.getChildren().add(new TreeItem("Apocalipse now"));
-  TreeItem Peliculas_Familiares = new TreeItem("Peliculas Familiares",imagen2);
-  TreeItem Infantiles = new TreeItem("Peliculas Infantiles",imagen3);
-  TreeItem Comedia= new TreeItem("Comedia",imagen4);
-  // Opciones de los subdirectorio Infantiles y Comedia
+        TreeItem Peliculas_Familiares = new TreeItem("Peliculas Familiares",imagen2);
+        TreeItem Infantiles = new TreeItem("Peliculas Infantiles",imagen3);
+        TreeItem Comedia= new TreeItem("Comedia",imagen4);
+        // Opciones de los subdirectorio Infantiles y Comedia
 	Infantiles.getChildren().add(new TreeItem("Fantasia"));
 	Infantiles.getChildren().add(new TreeItem("Toy Story"));
 	Comedia.getChildren().add(new TreeItem("No me chilles que no te veo"));
@@ -56,12 +57,12 @@ TreeItem rootItem = new TreeItem("Peliculas");
 	Peliculas_Familiares.getChildren().add(new TreeItem("Los visitantes"));
 	Peliculas_Familiares.getChildren().add(new TreeItem("E.T"));
 			
-  TreeItem Peliculas_Drama = new TreeItem("Peliculas Drama",imagen5);
-  Peliculas_Drama.getChildren().add(new TreeItem("Heat"));
+        TreeItem Peliculas_Drama = new TreeItem("Peliculas Drama",imagen5);
+        Peliculas_Drama.getChildren().add(new TreeItem("Heat"));
 	Peliculas_Drama.getChildren().add(new TreeItem("Bailando con lobos"));
 	Peliculas_Drama.getChildren().add(new TreeItem("Gran Torino"));
-  //Se añaden a la raíz
-  rootItem.getChildren().add(Peliculas_Belicas);
+        //Se añaden a la raíz
+       rootItem.getChildren().add(Peliculas_Belicas);
   rootItem.getChildren().addAll(Peliculas_Familiares);
   rootItem.getChildren().add(Peliculas_Drama);
 
@@ -95,11 +96,13 @@ treeView.getSelectionModel().selectedItemProperty().addListener(new ChangeListen
 	                String eleccion = (String) ((TreeItem) newValue).getValue();
 	                // Creamos objeto de ventana emergente para poder mostrar la información.
 	                try {
+			       // Esta sentencia llama a la clase del paquete -import emergente.* - Que debemos de creear dentro de SRC del proyecto.
 	                	ventanaEmergente nueva = new ventanaEmergente();
 	                	nueva.mostrar_negrita(  "La pelicula selecciona es:\n" + eleccion, "Pelicula seleccionada", 600, 400);
 	                	 etq.setText(eleccion);
 	                	
 	                }catch(Exception e) {
+			        // Esta sentencia llama a la clase del paquete -import emergente.* - Que debemos de creear dentro de SRC del proyecto.
 	                	ventanaEmergenteAlerta alerta = new ventanaEmergenteAlerta();
 	                	alerta.alerta("Atención", "Error fatal");
 	                }
@@ -296,6 +299,161 @@ public class Main extends Application {
 		launch(args);
 	}
 	  
+}
+
+```
+### Clases del paquete Emergente
+* Estás 2 clases son las encargadas de crear las ventanas emergentes.
+* 1º Ventana emergente que informa de la pelicula seleccionada.
+* 2º Ventana que en caso que se entre en el catch, nos informe del error que ha sucedido.
+```java
+ackage emergente;
+
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public class ventanaEmergente {
+	public static void mostrar(String mensaje, String Titulo,int ancho,int altura) {
+		Stage miStage = new Stage();
+		miStage.initModality(Modality.APPLICATION_MODAL);
+		
+		miStage.setTitle(Titulo);
+		miStage.setMinWidth(700);
+		miStage.setMinHeight(300);
+		Label miLabel = new Label();
+		miLabel.setText(mensaje);
+		
+		Button miBoton = new Button();
+		miBoton.setText("Cerrar");
+		
+		miBoton.setOnAction(e -> miStage.close());
+		
+		BorderPane miPane =  new BorderPane();
+		Scene miScene = new Scene(miPane,ancho,altura);
+		
+		miPane.setTop(miLabel);
+		miPane.setCenter(miBoton);
+		
+		miStage.setScene(miScene);
+		
+		miStage.showAndWait();
+	}
+	//Método sobre cargado para tener una ventana Standar,
+	// Así no tenemos que pasar en el contructor una medida.
+	public static void mostrar(String mensaje, String Titulo) {
+		Stage miStage = new Stage();
+		miStage.initModality(Modality.APPLICATION_MODAL);
+		
+		miStage.setTitle(Titulo);
+		miStage.setMinWidth(700);
+		miStage.setMinHeight(300);
+		Label miLabel = new Label();
+		miLabel.setText(mensaje);
+		
+		Button miBoton = new Button();
+		miBoton.setText("Cerrar");
+		
+		miBoton.setOnAction(e -> miStage.close());
+		
+		BorderPane miPane =  new BorderPane();
+		Scene miScene = new Scene(miPane,800,600);
+		
+		miPane.setTop(miLabel);
+		miPane.setCenter(miBoton);
+		
+		miStage.setScene(miScene);
+		
+		miStage.showAndWait();
+	}
+	
+	public static void mostrar_negrita(String mensaje_negrita, String Titulo_negrita,int ancho,int altura) {
+		Stage miStage = new Stage();
+		miStage.initModality(Modality.APPLICATION_MODAL);
+		
+		miStage.setTitle(Titulo_negrita);
+		miStage.setMinWidth(700);
+		miStage.setMinHeight(300);
+		
+		Font fuente = new Font("Monospaced", 20);
+		Label miLabel = new Label();
+		miLabel.setText( mensaje_negrita);
+		miLabel.setFont(fuente);
+		Button miBoton = new Button();
+		miBoton.setText("Cerrar");
+		
+		miBoton.setOnAction(e -> miStage.close());
+		
+		BorderPane miPane =  new BorderPane();
+		Scene miScene = new Scene(miPane, ancho,altura);
+		
+		miPane.setTop(miLabel);
+		miPane.setCenter(miBoton);
+		
+		miStage.setScene(miScene);
+		
+		miStage.showAndWait();
+	}
+}
+	
+
+
+
+```
+```java
+package emergente;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public class ventanaEmergenteAlerta {
+	public static void alerta(String mensaje, String Titulo,int ancho,int altura) {
+		Stage miStage = new Stage();
+		miStage.setMinWidth(ancho);
+		miStage.setMinHeight(altura);
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+	    alert.setHeaderText(null);
+	    alert.setTitle(Titulo);
+	    alert.setContentText(mensaje);
+	    alert.showAndWait();
+		
+		miStage.showAndWait();
+	}
+	//Método sobre cargado para tener una ventana Standar,
+	// Así no tenemos que pasar en el contructor una medida.
+	public static void alerta(String mensaje, String Titulo) {
+		Stage miStage = new Stage();
+		miStage.initModality(Modality.APPLICATION_MODAL);
+		
+		miStage.setTitle(Titulo);
+		miStage.setMinWidth(700);
+		miStage.setMinHeight(300);
+		Label miLabel = new Label();
+		miLabel.setText(mensaje);
+		
+		Button miBoton = new Button();
+		miBoton.setText("Cerrar");
+		
+		miBoton.setOnAction(e -> miStage.close());
+		
+		BorderPane miPane =  new BorderPane();
+		Scene miScene = new Scene(miPane,800,600);
+		
+		miPane.setTop(miLabel);
+		miPane.setCenter(miBoton);
+		
+		miStage.setScene(miScene);
+		
+		miStage.showAndWait();
+	}
 }
 
 ```
