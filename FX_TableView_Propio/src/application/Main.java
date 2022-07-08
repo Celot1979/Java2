@@ -5,14 +5,18 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,21 +40,41 @@ public class Main extends Application {
 			
 			
 			tablaPeliculas = new TableView<Peliculas>();
+			// El siguiente paso es para ahcer que la tabla sea editable
+			tablaPeliculas.setEditable(true);
 			
 			TableColumn<Peliculas, String> colTitulo = new TableColumn("Titulo");
 			colTitulo.setMinWidth(290);
 			colTitulo.setCellValueFactory(new PropertyValueFactory<Peliculas, String>("titulo"));
+			/* Método por el cual podremos modificar en la GUI la columna del Titulo.
+			 * Para conseguir esto, debemos de combertir la celda del la tabla
+			 * en un TextField.
+			 * 
+			 * Lo conseguimos con una clase que tiene la API y va dentro
+			 * de los paréntesis inciales.
 			
-		
+			 */
+			colTitulo.setCellFactory(TextFieldTableCell.forTableColumn());
+			 /*
+			  * Si no se acompaña de la creación de un me´todo que quede a la escucha, sólo
+			  * se modifica a nivel visual.
+			  */
+			colTitulo.setOnEditCommit(e -> modificaTitulo(e));
+			
+			
 			TableColumn<Peliculas,Integer> colAno = new TableColumn("Año");
 			colAno.setMinWidth(290);
 			colAno.setCellValueFactory(new PropertyValueFactory<Peliculas, Integer>("year"));
-			
+			colAno.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+			colAno.setOnEditCancel(e -> modificarAno(e));
 		
 			TableColumn<Peliculas,Double> colPrecio = new TableColumn("Precio");
 			colPrecio.setMinWidth(290);
 			colPrecio.setCellValueFactory(new PropertyValueFactory<Peliculas, Double>("precio"));
-
+			colPrecio.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+			colPrecio.setOnEditCancel(e -> modificarPrecio(e));
+			
+			
 			
 			tablaPeliculas.getColumns().addAll(colTitulo,colAno,colPrecio);
 			
@@ -85,6 +109,27 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	private void modificarPrecio(CellEditEvent<Peliculas, Double> e) {
+		// TODO Auto-generated method stub
+		Peliculas p3 = e.getRowValue();
+		p3.setPrecio(e.getNewValue());
+	}
+	// Este método sirve para escuchar los cambios en las columnas del Año
+	private void modificarAno(CellEditEvent<Peliculas, Integer> e) {
+		// TODO Auto-generated method stub
+		Peliculas p3 = e.getRowValue();
+		p3.setYear(e.getNewValue());
+	}
+	// Este método sirve para escuchar los cambios en las columnas del titulo
+	private void modificaTitulo(CellEditEvent<Peliculas, String> e) {
+		// TODO Auto-generated method stub
+		//Alamacena en ese objeto Pelicula el contenido de la fila
+		Peliculas p = e.getRowValue();
+		p.setTitulo(e.getNewValue());
+		
+	}
+	
+	
 	public ObservableList<Peliculas> cargaDatos(){
 		datos = FXCollections.observableArrayList();
 		datos.add(new Peliculas("Heat",1995,29.95));
@@ -149,7 +194,7 @@ public class Main extends Application {
 	private Button enviar,borrar;
 	private TableView<Peliculas> tablaPeliculas;
 	private ObservableList<Peliculas> datos,borrar_p;	
-	private String pelicula;
+	private String pelicula,pepe;
 	private int Years;
 	private double pre;
 	private Peliculas nuevo;
