@@ -1,0 +1,50 @@
+
+
+.root{
+	-fx-background-image: url("../IMG/Degradado.png");
+	-fx-background-repeat: no-repeat; 
+    -fx-background-size: 100% 100%; 
+    -fx-background-position: center center;
+}
+
+/* ESTILO PARA BOTONES Cosita dice que debemos poner los botones asín */
+
+.boton-stilo-1 {
+-fx-color:#333;
+     -fx-background-color:#003F5D;
+} 
+
+.boton-stilo-1:focused{
+     -fx-background-color:#6200EE1F;
+} 
+.boton-stilo-1hover{
+
+     -fx-background-color:#e1eb0d;
+}
+
+.boton-stilo-1pressed{
+     -fx-background-color:#6200EE1F;
+}
+
+.boton-stilo-1:disabled{
+     -fx-text-fill:gray;
+}
+
+.boton-stilo-salir{
+-fx-color:#333;
+     -fx-background-color:#003F5D;
+} 
+.boton-stilo-salir:focused{
+-fx-background-color:#eb120f;
+}
+
+.boton-conjunto{
+-fx-color:#333;
+     -fx-background-color:#003F5D;
+}
+.boton-enviar:focused{
+-fx-color:#333;
+-fx-background-color:#e1eb0d;
+}
+
+
