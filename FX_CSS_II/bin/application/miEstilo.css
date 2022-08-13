@@ -1,0 +1,28 @@
+
+
+.root{
+	-fx-background-color:rgb(208,158,49);
+	-fx-font-family:"Impact";
+	-fx-font-size:14pt;
+}
+/* Estilo para personalizar un componente - en este caso Button/
+Button{
+	-fx-background-color:rgb(42,133,13);
+}
+RadioButton{
+
+	-fx-background-color:rgb(42,133,13);
+}
+/* Estilo de CLASE*/
+.mi_Estilo{
+
+	-fx-background-color:rgb(42,133,13);
+	-fx-font-size:14pt;
+	-fx-underline: true;
+	
+}
+/* Estilo ID*/
+#titulo{
+	-fx-text-fill:white;
+	-fx-font-size:26pt;
+}
